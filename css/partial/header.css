@@ -1,0 +1,43 @@
+.header {
+    background: #ffac00;
+    text-align: right;
+    box-shadow: 0px 0px 0px 8px #fff, 0px 0px 0px 16px #ffac00; 
+    overflow: auto;
+}
+.header img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.header .nav {
+    margin: 15px;
+}
+.header .nav > a {
+    padding: 0 10px;
+    line-height: 10px;
+    word-break: keep-all;
+    transition: all 0.4s;
+    cursor: pointer;
+}
+.header .nav > a:hover{
+    background: #fff;
+    padding: 20px 10px;
+    color: #fe7215;
+}
+.focuspage{
+    background: #fff;
+    color: #fe7215;
+    padding: 20px 10px !important;
+}
+input:focus:invalid {
+    background: #ffd1d1;
+    border: 1px solid rgb(250, 122, 122);
+}
+@keyframes pagein {
+    0% {
+        transform: 'translate(100vw)'
+    }
+    100% {
+        transform: 'translate(0)'
+    }
+}

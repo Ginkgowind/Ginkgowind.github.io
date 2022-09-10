@@ -1,0 +1,873 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="keywords"><meta name="descriptioon" content=""><meta name="renderer" content="wekit"><link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"><link rel="stylesheet" href="/css/public.css"><link rel="stylesheet" href="/css/reset.css"><link rel="stylesheet" href="/css/iconfont.css"><script>var _hmt = _hmt || [];(function(){var hm = document.createElement("script");hm.src = "https://hm.baidu.com/hm.js?7b429839b56cf831028b7ac4cb9b5086";var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);})()</script><title>《GAMES101》整理 [ Hexo ]</title><link rel="stylesheet" href="/css/partial/footer.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css"><link rel="stylesheet" href="/css/partial/sidebar.css"><link rel="stylesheet" href="/css/post.css"><link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head><body class="scroll"><link rel="stylesheet" href="/css/partial/header.css"><div class="header scroll"><div class="maxwidth"><div class="nav"><a id="artlist" href="/404"><i class="iconfont icon404"></i><span class="headhid">&nbsp;404</span></a><a id="artlist" href="/archives"><i class="iconfont iconarchives"></i><span class="headhid">&nbsp;Archives</span></a><a id="artlist" href="/link"><i class="iconfont iconlink"></i><span class="headhid">&nbsp;Link</span></a><a id="artlist" href="/about"><i class="iconfont iconabout"></i><span class="headhid">&nbsp;About</span></a></div><div class="search">TONG-H</div></div></div><div class="main"> <div class="maxwidth"><link rel="stylesheet" href="/css/partial/sidebar.css"><div class="scroll" id="sidebar"><div class="social"><a href="/archives" title="Home"><i class="iconfont iconHome"></i></a><a href="1813828837@qq.com" title="E-Mail"><i class="iconfont iconweibiaoti554"></i></a><a target="_blank" rel="noopener" href="https://github.com/Ginkgowind" title="GitHub"><i class="iconfont iconGitHub"></i></a></div><div class="structure category-list"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%EF%BC%9A%E5%9F%BA%E7%A1%80%E5%8F%98%E6%8D%A2%E7%9F%A9%E9%98%B5%E6%80%BB%E7%BB%93-%E7%BC%A9%E6%94%BE%EF%BC%8C%E6%97%8B%E8%BD%AC%EF%BC%8C%E4%BD%8D%E7%A7%BB"><span class="toc-number">1.</span> <span class="toc-text">一：基础变换矩阵总结(缩放，旋转，位移)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-%E8%A1%A5%E5%85%85-%EF%BC%9A%E7%89%B9%E5%BE%81%E5%88%86%E8%A7%A3%E5%92%8C%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3%E7%9A%84%E5%87%A0%E4%BD%95%E8%A7%A3%E9%87%8A"><span class="toc-number">2.</span> <span class="toc-text">一(补充)：特征分解和奇异值分解的几何解释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%EF%BC%9A%E8%A7%86%E5%9B%BE%E5%8F%98%E6%8D%A2-%E5%9D%90%E6%A0%87%E7%B3%BB%E8%BD%AC%E5%8C%96%EF%BC%8C%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1%EF%BC%8C%E9%80%8F%E8%A7%86%E6%8A%95%E5%BD%B1%EF%BC%8C%E8%A7%86%E5%8F%A3%E5%8F%98%E6%8D%A2"><span class="toc-number">3.</span> <span class="toc-text">二：视图变换(坐标系转化，正交投影，透视投影，视口变换)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%EF%BC%9A%E7%9B%B4%E7%BA%BF%E5%85%89%E6%A0%85%E5%8C%96%E7%9A%84%E6%95%B0%E5%80%BC%E5%BE%AE%E5%88%86%E7%AE%97%E6%B3%95-%E4%B8%AD%E7%82%B9Brensenham%E7%AE%97%E6%B3%95%E5%92%8C%E4%B8%89%E8%A7%92%E5%BD%A2%E7%9A%84%E5%85%89%E6%A0%85%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">三：直线光栅化的数值微分算法,中点Brensenham算法和三角形的光栅化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89-%E8%A1%A5%E5%85%85-%EF%BC%9A%E9%87%8D%E5%BF%83%E5%9D%90%E6%A0%87-barycentric-coordinates-%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%85%B6%E4%BD%9C%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">三(补充)：重心坐标(barycentric coordinates)详解及其作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%EF%BC%9A%E6%8A%97%E9%94%AF%E9%BD%BFSSAA%E5%8F%8AMSAA%E7%AE%97%E6%B3%95%E5%92%8C%E9%81%AE%E6%8C%A1%E5%89%94%E9%99%A4Z-Buffer%E7%AE%97%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">四：抗锯齿SSAA及MSAA算法和遮挡剔除Z-Buffer算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%EF%BC%9A%E5%B1%80%E9%83%A8%E5%85%89%E7%85%A7%E6%A8%A1%E5%9E%8B-Blinn-Phong-%E5%8F%8D%E5%B0%84%E6%A8%A1%E5%9E%8B-%E4%B8%8E%E7%9D%80%E8%89%B2%E6%96%B9%E6%B3%95-Phong-Shading"><span class="toc-number">7.</span> <span class="toc-text">五：局部光照模型(Blinn-Phong 反射模型)与着色方法(Phong Shading)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%EF%BC%9A%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8%E9%87%8D%E5%BF%83%E5%9D%90%E6%A0%87%E6%8F%92%E5%80%BC-%E9%80%8F%E8%A7%86%E7%9F%AB%E6%AD%A3%E6%8F%92%E5%80%BC-Perspective-Correct-Interpolation-%E5%92%8C%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF%E6%80%BB%E7%BB%93"><span class="toc-number">8.</span> <span class="toc-text">六：正确使用重心坐标插值(透视矫正插值(Perspective-Correct Interpolation))和图形渲染管线总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF%E6%80%BB%E7%BB%93"><span class="toc-number">8.1.</span> <span class="toc-text">渲染管线总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%BA%94%E7%94%A8%E9%98%B6%E6%AE%B5"><span class="toc-number">8.1.1.</span> <span class="toc-text">1、应用阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%87%A0%E4%BD%95%E9%98%B6%E6%AE%B5"><span class="toc-number">8.1.2.</span> <span class="toc-text">2、几何阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%85%89%E6%A0%85%E5%8C%96%E9%98%B6%E6%AE%B5"><span class="toc-number">8.1.3.</span> <span class="toc-text">3、光栅化阶段</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%EF%BC%9A%E7%BA%B9%E7%90%86%E6%98%A0%E5%B0%84-Texture-Mapping-%E5%8F%8AMipmap%E6%8A%80%E6%9C%AF"><span class="toc-number">9.</span> <span class="toc-text">七：纹理映射(Texture Mapping)及Mipmap技术</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%EF%BC%9A%E7%BA%B9%E7%90%86%E6%98%A0%E5%B0%84%E7%9A%84%E5%BA%94%E7%94%A8-%E6%B3%95%E7%BA%BF%E8%B4%B4%E5%9B%BE%EF%BC%8C%E5%87%B9%E5%87%B8%E8%B4%B4%E5%9B%BE%E4%B8%8E%E9%98%B4%E5%BD%B1%E8%B4%B4%E5%9B%BE%E7%AD%89%E7%9B%B8%E5%85%B3%E5%BA%94%E7%94%A8%E7%9A%84%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3"><span class="toc-number">10.</span> <span class="toc-text">八：纹理映射的应用(法线贴图，凹凸贴图与阴影贴图等相关应用的原理详解)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%EF%BC%9A%E5%87%A0%E4%BD%951%E2%80%94%E9%9A%90%E5%BC%8F%E6%9B%B2%E9%9D%A2-%E4%BB%A3%E6%95%B0%E5%BD%A2%E5%BC%8F-CSG-%E8%B7%9D%E7%A6%BB%E5%87%BD%E6%95%B0-%E5%88%86%E5%9E%8B%E5%87%A0%E4%BD%95-%E4%B8%8E%E6%98%BE%E5%BC%8F%E6%9B%B2%E9%9D%A2"><span class="toc-number">11.</span> <span class="toc-text">九：几何1—隐式曲面(代数形式,CSG, 距离函数,分型几何)与显式曲面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%EF%BC%9A%E5%87%A0%E4%BD%952%E2%80%94%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF-Bezier-Curves-%E4%B8%8E%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E9%9D%A2-Bezier-Surfaces"><span class="toc-number">12.</span> <span class="toc-text">十：几何2—贝塞尔曲线(Bézier Curves)与贝塞尔曲面(Bézier Surfaces)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%EF%BC%9A%E5%87%A0%E4%BD%953%E2%80%94%E6%9B%B2%E9%9D%A2%E7%BB%86%E5%88%86-Mesh-subdivision-%E4%B8%8E%E6%9B%B2%E9%9D%A2%E7%AE%80%E5%8C%96-Mesh-Smplication"><span class="toc-number">13.</span> <span class="toc-text">十一：几何3—曲面细分(Mesh subdivision)与曲面简化(Mesh Smplication)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%EF%BC%9AWhitted-Style%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="toc-number">14.</span> <span class="toc-text">十二：Whitted-Style光线追踪原理详解及实现细节</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B8%89%EF%BC%9A%E5%8A%A0%E9%80%9F%E5%85%89%E7%BA%BF%E8%BF%BD%E8%B8%AA%EF%BC%88KD-Tree-and-Bounding-Volume-Hierarchy%EF%BC%89"><span class="toc-number">15.</span> <span class="toc-text">十三：加速光线追踪（KD-Tree and Bounding Volume Hierarchy）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E5%9B%9B%EF%BC%9A%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E6%B8%B2%E6%9F%93%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%E8%BE%90%E5%B0%84%E5%BA%A6%E9%87%8F%E5%AD%A6%EF%BC%8CBRDF%E5%92%8C%E6%B8%B2%E6%9F%93%E6%96%B9%E7%A8%8B"><span class="toc-number">16.</span> <span class="toc-text">十四：基于物理渲染的基础知识(辐射度量学，BRDF和渲染方程)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%BA%94%EF%BC%9A%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E7%9A%84%E6%B8%B2%E6%9F%93-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E8%B7%AF%E5%BE%84%E8%BF%BD%E8%B8%AA"><span class="toc-number">17.</span> <span class="toc-text">十五：基于物理的渲染(蒙特卡洛路径追踪)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E5%85%AD%EF%BC%9A%E7%85%A7%E7%9B%B8%E6%9C%BA%E4%B8%8E%E9%80%8F%E9%95%9C"><span class="toc-number">18.</span> <span class="toc-text">十六：照相机与透镜</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E4%B8%83%EF%BC%9A%E5%9F%BA%E4%BA%8E%E7%89%A9%E7%90%86%E7%9A%84%E6%B8%B2%E6%9F%93%EF%BC%9A%E5%BE%AE%E5%B9%B3%E9%9D%A2%E7%90%86%E8%AE%BA-Cook-Torrance-BRDF%E6%8E%A8%E5%AF%BC"><span class="toc-number">19.</span> <span class="toc-text">十七：基于物理的渲染：微平面理论(Cook-Torrance BRDF推导)</span></a></li></ol></div><div class="tags"><a href="/tags/C/" style="font-size: 12px; color: #ffac00">C++</a> <a href="/tags/UE4/" style="font-size: 12px; color: #ffac00">UE4</a> <a href="/tags/cs/" style="font-size: 12px; color: #ffac00">cs</a> <a href="/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 12px; color: #ffac00">图形学</a> <a href="/tags/%E5%A5%BD%E6%96%87%E6%8E%A8%E8%8D%90/" style="font-size: 12px; color: #ffac00">好文推荐</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 12px; color: #ffac00">数据结构</a></div></div><div class="post rightside"><div class="artititle">《GAMES101》整理</div><div class="info"><i class="iconfont iconbiaoqian" title="文章标签"><span>图形学</span></i><i class="iconfont iconshijian"><span title="文章发布时间">2022-09-10</span></i></div><div class="postDetail"><blockquote>
+<p>基于《GAMES101》课程<br>整理自CSDN某位博主</p>
+</blockquote>
+<p><a name="bMMtC"></a></p>
+<h1 id="一：基础变换矩阵总结-缩放，旋转，位移"><a href="#一：基础变换矩阵总结-缩放，旋转，位移" class="headerlink" title="一：基础变换矩阵总结(缩放，旋转，位移)"></a>一：基础变换矩阵总结(缩放，旋转，位移)</h1><ol>
+<li>2D线性变换<ol>
+<li>缩放</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647446184169-daba343e-a9d8-4c92-85b8-e5c3cef935f4.png" alt="image.png"></p>
+<ol start="2">
+<li>剪切</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647446256386-73deac49-c0bc-446b-aa06-a6c0f1df6b46.png" alt="image.png"></p>
+<ol start="3">
+<li>旋转</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647446285089-cb997900-4f63-4488-b497-73e41b07b405.png" alt="image.png"></p>
+<ol start="2">
+<li>3D线性变换<ol>
+<li>缩放</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647446363718-a49fbe9e-0be5-430c-b3a4-cfd095d71d72.png" alt="image.png"></p>
+<ol start="2">
+<li>剪切</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647446381503-aa8cd679-1069-4a6f-abdd-dd76174bba46.png" alt="image.png"></p>
+<ol start="3">
+<li>旋转</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647446399560-5835fb2e-6267-48f2-80f5-4416de2343d0.png" alt="image.png"></p>
+<ol start="4">
+<li>绕任意轴旋转：我们把该轴给先旋转到任意的x，y，z轴上，然后就可以应用基本的旋转矩阵，最后再逆旋转回来即可。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647446682284-5da0056f-6b97-45ff-92fa-a38e4643ea9c.png" alt="image.png"></p>
+<ol start="3">
+<li>放射变换<ol>
+<li>位移</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647446493586-f68b2e0c-fc2d-4a6e-91fd-d98218ee0a27.png" alt="image.png"><br><a name="uM5b9"></a></p>
+<h1 id="一-补充-：特征分解和奇异值分解的几何解释"><a href="#一-补充-：特征分解和奇异值分解的几何解释" class="headerlink" title="一(补充)：特征分解和奇异值分解的几何解释"></a>一(补充)：特征分解和奇异值分解的几何解释</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38065509/article/details/105286056?spm=1001.2014.3001.5502">CSDN博客链接</a><br><a name="N2HQk"></a></p>
+<h1 id="二：视图变换-坐标系转化，正交投影，透视投影，视口变换"><a href="#二：视图变换-坐标系转化，正交投影，透视投影，视口变换" class="headerlink" title="二：视图变换(坐标系转化，正交投影，透视投影，视口变换)"></a>二：视图变换(坐标系转化，正交投影，透视投影，视口变换)</h1><p>注：<strong>MVP变换</strong></p>
+<ol>
+<li>模型变换(modeling tranformation)：利用基础的变换矩阵将世界当中的物体调整至我们想要的地方(旋转，平移，缩放)。</li>
+<li>摄像机变换(camera&#x2F;view tranformation)：得到所有可视物体与摄像机的相对位置。把物体和摄像机一起做移动，如果能够把摄像机的坐标轴(假设为u,v,w 分别对应原世界空间中的x,y,z)移动到标准的x，y，z轴，那么此时物体的坐标自然便是相对坐标。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647482981824-912993bb-06ab-47c9-a37c-94e7a4bb6787.png" alt="image.png"></p>
+<ol start="3">
+<li>投影变换(projection tranformation)<ol>
+<li>正交投影变换(Orthographic Projection Transformation)：是相对简单的一种，坐标的相对位置都不会改变，所有光线都是平行传播，我们只需将物体（可视部分，即上图的那个长方体）全部转换到一个[ −1 , 1]3 的空间之中即可（其中x，y坐标便是投影结果，保留z是为了之后的遮挡检测）。压缩成小立方体是为了之后的计算更加的方便，在转换到屏幕坐标的时候就会重新拉伸回来。</li>
+<li>透视投影变换(Perspective Projection Transformation)：类似人眼看东西的方式，近大远小。<ol>
+<li>由两步组成_Mpersp _&#x3D; _Mortho · Mpersp-&gt;ortho。_即先按前面变换成长方体，再正交投影成[ −1 , 1]3</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647484616209-99fd4f84-d3cf-4ab7-9b98-8e2dace83982.png" alt="image.png"></p>
+<ol start="4">
+<li>将投影所得转换到屏幕空间：[ −1 , 1]2 -&gt; [0,width]∗[0,height]</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647484998016-4552c42b-8b6c-495c-90e1-3fa325277a7f.png" alt="image.png"></p>
+<ol start="5">
+<li>总结：<img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647485045388-76a47d44-387a-48d0-af9e-8890362a9ca1.png" alt="image.png"></li>
+<li><strong>MVP变换</strong>：<ol>
+<li>M：model 模型变换 (placing objects)</li>
+<li>V：view 视口变换 (placing camera)</li>
+<li>P：projection 投影变换<br><a name="pq3FB"></a></li>
+</ol>
+</li>
+</ol>
+<h1 id="三：直线光栅化的数值微分算法-中点Brensenham算法和三角形的光栅化"><a href="#三：直线光栅化的数值微分算法-中点Brensenham算法和三角形的光栅化" class="headerlink" title="三：直线光栅化的数值微分算法,中点Brensenham算法和三角形的光栅化"></a>三：直线光栅化的数值微分算法,中点Brensenham算法和三角形的光栅化</h1><blockquote>
+<p>简单来说光栅化的目的就是将想要展现的物体给真正现实到屏幕上的过程，因为我们的物体其实都是一个个顶点数据来表示的，如何表这些蕴含几何信息的数据转化为屏幕上的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%83%8F%E7%B4%A0&spm=1001.2101.3001.7020">像素</a>就是光栅化所考虑的东西。比如说一条直线，究竟该用哪些像素点去逼近它，一个三角形，又用哪些像素集合表示它，这都是光栅化的过程。</p>
+</blockquote>
+<ol>
+<li>屏幕像素的表示</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647486449299-a223b5cc-b21e-430a-8cd9-4d065ecd5ac7.png" alt="image.png"></p>
+<ol start="2">
+<li>直线光栅化算法（GAMES101没有展开讲）<ol>
+<li>DDA数值微分算法</li>
+<li>中点Bresenham算法</li>
+</ol>
+</li>
+<li>三角形光栅化算法：对每一个像素进行采样，如果像素中心在三角形内，那这个像素点就需要被采用。（利用叉乘判断是否在三角形内）<ol>
+<li>优化方法：用bounding box包围住三角形，只对box内进行采样；找到边界的话，中间的也不用再采样。</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647487249524-deab87e1-c034-4185-bd73-950f60accd0a.png" alt="image.png"><br><a name="Z9hwk"></a></p>
+<h1 id="三-补充-：重心坐标-barycentric-coordinates-详解及其作用"><a href="#三-补充-：重心坐标-barycentric-coordinates-详解及其作用" class="headerlink" title="三(补充)：重心坐标(barycentric coordinates)详解及其作用"></a>三(补充)：重心坐标(barycentric coordinates)详解及其作用</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647487680406-da36588c-04e5-41cb-908b-9da22713a8b7.png" alt="image.png"></p>
+<ol>
+<li>几何面积角度求解</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647487785040-35e5c080-257f-446c-b107-ab98cd9b1fb9.png" alt="image.png"></p>
+<ol start="2">
+<li>坐标系角度求解：以A点为原点，AB,AC分别为新的坐标系的单位向量构建坐标系</li>
+<li>重心坐标的运用<ol>
+<li>判断点是否在三角形内</li>
+<li>用来插值（很常用）<br><a name="DfgiE"></a></li>
+</ol>
+</li>
+</ol>
+<h1 id="四：抗锯齿SSAA及MSAA算法和遮挡剔除Z-Buffer算法"><a href="#四：抗锯齿SSAA及MSAA算法和遮挡剔除Z-Buffer算法" class="headerlink" title="四：抗锯齿SSAA及MSAA算法和遮挡剔除Z-Buffer算法"></a>四：抗锯齿SSAA及MSAA算法和遮挡剔除Z-Buffer算法</h1><blockquote>
+<p>走样示例：我们用有限离散的像素点去逼近连续的三角形，那么自然会出现这种锯齿走样的现象，因为这种近似是不准确的。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647488943611-5a8b1167-c8e3-49f3-80d9-012a14e23a25.png" alt="image.png"></p>
+</blockquote>
+<ol>
+<li>反走样<ol>
+<li>超采样反走样(Super Sampling AA，SSAA)<ol>
+<li>下图的计算量变为原来的四倍</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647489163060-f1555374-a49d-40de-b989-62c2fb1dab4c.png" alt="image.png"></p>
+<ol start="2">
+<li>多采样反走样(Multi-Sampling AA，MSAA)<ol>
+<li>是对SSAA的一个改进，我们依然同样会分采样点，但是只会去计算究竟有几个采样点会被三角形cover，计算颜色的时候只会利用像素中心坐标计算一次颜色(即所有的信息都会被插值到像素中心然后取计算颜色)</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647489570599-c3eb5c1f-2b7d-4245-95ee-99136cf308be.png" alt="image.png"></p>
+<ol start="2">
+<li>Z-Buffer算法<ol>
+<li>步骤<ol>
+<li>Z-Buffer算法需要为每个像素点维持一个深度数组记为zbuffer，其每个位置初始值置为无穷大（即离摄像机无穷远）。</li>
+<li>随后我们遍历每个三角形面上的每一个像素点[x,y]，如果该像素点的深度值z，小于zbuffer[x,y]中的值，则更新zbuffer[x,y]值为该点深度值z，并同时更新该像素点[x,y]的颜色为该三角形面上的该点的颜色。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647489823251-d9ed93ae-d939-44aa-9606-183aa9d6215e.png" alt="image.png"></p>
+<blockquote>
+<p>tips:这里的MSAA说的有些简单，实际操作的时候，同样会维护所有子采样点的color buffer和depth buffer，每次对pixel中心计算shading的时候，会根据depth值(因为可能不止一个三角形拥有这个像素)和三角形覆盖关系判断是否把颜色值写入。<br>如下面这个例子(灵魂画手见谅)<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647490118110-1a44b202-7a68-41b2-81bb-6f4cc0bce11a.png" alt="image.png"><br>红色和蓝色三角形同时覆盖了黑色的像素中心，那么在第一次渲染红色三角形的时候会将颜色写入1,3号采样点，同时更新depth buffer，但此时2,4号采样点的depth buffer依然是无穷(初始值)，所以在渲染到蓝色三角形的时候会将蓝色写入2,4号并更新depth buffer。如果还有更多的三角形覆盖黑色像素中心的话，会重复上述这个过程，即根据是否覆盖以及深度值判断是否写入颜色值。最后将这4个子采样点颜色平均即可。<br>个人感觉这种MSAA的效果是没有SSAA好的，因为MSAA相当于默认了采样点的颜色与像素中心差别不大，导致了误差的存在，特别是在纹理映射的时候，如果纹理过大，MSAA可能完全没啥效果，因为一个屏幕空间像素覆盖了多个纹理空间像素，屏幕空间像素内微小的采样点距离差距都会导致在纹理空间中完全不一样的颜色信息，如果还是只做一次屏幕空间像素中心的shading的话，误差就会非常大。</p>
+</blockquote>
+<p><a name="E5B72"></a></p>
+<h1 id="五：局部光照模型-Blinn-Phong-反射模型-与着色方法-Phong-Shading"><a href="#五：局部光照模型-Blinn-Phong-反射模型-与着色方法-Phong-Shading" class="headerlink" title="五：局部光照模型(Blinn-Phong 反射模型)与着色方法(Phong Shading)"></a>五：局部光照模型(Blinn-Phong 反射模型)与着色方法(Phong Shading)</h1><blockquote>
+<p>此环节做shading，处理光照</p>
+</blockquote>
+<p>光线类型：1、镜面反射 2、漫反射 3、环境光</p>
+<ol>
+<li>泛光模型（只能看到一个物体的平面形状）</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647573172428-a1f1c33a-c51a-48a6-88c0-7af0dfbde32b.png" alt="image.png"></p>
+<ol start="2">
+<li>Lambert漫反射模型</li>
+</ol>
+<ul>
+<li>概念图</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647573665100-92a076cd-bcc5-4ddd-b3b5-7ec133ed3632.png" alt="image.png"></p>
+<ul>
+<li>数学公式</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647573740106-3547928a-09e9-49b4-b33a-cfc5932feb43.png" alt="image.png"></p>
+<ul>
+<li>效果图</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647574418801-6fde3755-0d72-4b91-bca4-36d872996a05.png" alt="image.png"></p>
+<p>](<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38065509/article/details/105691559">https://blog.csdn.net/qq_38065509/article/details/105691559</a>)</p>
+<ol start="3">
+<li>Phong反射模型</li>
+</ol>
+<ul>
+<li>直观图与数学公式</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647575225236-4d56c180-b4b5-4ce4-b979-2d70ab2ff69d.png" alt="image.png"></p>
+<ul>
+<li>效果图</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647575595649-63cb91ed-55ff-4846-a3a0-84688aba08c0.png" alt="image.png"></p>
+<ol start="4">
+<li>Blinn-Phong反射模型（与Phong相比只是加速了计算，引入了半程向量）</li>
+</ol>
+<ul>
+<li>直观图与数学公式</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647575996690-a91e063a-9bb2-472b-9aae-e66c26110cba.png" alt="image.png"></p>
+<ul>
+<li>效果图与总结</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647576090762-22969149-309b-4c4b-aca3-e7124a350e90.png" alt="image.png"></p>
+<ol start="5">
+<li>着色方法（频率）<ol>
+<li><strong>Flat Shading</strong><ol>
+<li>面着色，顾名思义以每一个面作为一个着色单位。模型数据大多以很多个三角面进行存储，因此也就记录了每个面的法线向量，利用每个面的法线向量进行一次Blinn-Phong反射光照模型的计算，将该颜色赋予整个面，效果如下：</li>
+</ol>
+</li>
+<li><strong>Gouraud Shading</strong></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>由面的法向量求解顶点处的法向量：将所有共享这个点的面的法线向量加起来求均值，最后再标准化就得到了该顶点的法线向量了。</li>
+<li>注：三角形中间的属性由顶点的属性利用中心坐标插值得到。</li>
+</ul>
+<p>(tips:1.这里有两个tips可以注意一下，首先重心坐标一定要是原世界坐标空间中的重心坐标，但实际计算中一般会使用投影之后的二维平面来计算重心坐标，存在着一个误差需要校正，这会在下一节笔记中展开来谈。<br />2. 第二点，其实按理来说Gouraud用的是双线性插值(会在之后的贝塞尔曲线中具体讲解)，但是道理都是相同的，本文这里为了方便就直接用了重心坐标插值）</p>
+<ol start="3">
+<li><strong>Phong Shading</strong></li>
+</ol>
+<ul>
+<li>由顶点法向量利用重心坐标插值出面内法向量，再进行计算属性。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647584327038-e34fc821-2583-43cd-ab62-070eff317baa.png" alt="image.png"></p>
+<ol start="6">
+<li>在模型精度较高时，就没必要使用计算量较大的后两种方式</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647584409663-5afea9e1-50b3-49d5-9709-1625e225e013.png" alt="image.png"></p>
+<ol start="7">
+<li>Note：变换法线向量<blockquote>
+<p>有的读者可能会疑问，法线向量不是一直存在于世界坐标空间之中吗，为什么要去变换他呢，其实原因很简单，<strong>因为模型变换可能会导致模型位置形状发生改变</strong>，如果属于该模型的各个三角形面的法线向量不跟着改变的话，那么此时所记录的法线向量就是错误的。<strong>因此法线向量一定也要跟着模型本身发生改变。</strong><br>那么是否简单的将作用在模型本身的变换也作用在对应的法线向量之上就可以了呢？<strong>答案是否定的</strong>。</p>
+</blockquote>
+</li>
+</ol>
+<p>直接放结论：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38065509/article/details/105691559?spm=1001.2014.3001.5502">想看细节点这里</a><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647585204615-83b4b01b-9182-43d5-a784-15501ce7f558.png" alt="image.png"><br><a name="j8udw"></a></p>
+<h1 id="六：正确使用重心坐标插值-透视矫正插值-Perspective-Correct-Interpolation-和图形渲染管线总结"><a href="#六：正确使用重心坐标插值-透视矫正插值-Perspective-Correct-Interpolation-和图形渲染管线总结" class="headerlink" title="六：正确使用重心坐标插值(透视矫正插值(Perspective-Correct Interpolation))和图形渲染管线总结"></a>六：正确使用重心坐标插值(透视矫正插值(Perspective-Correct Interpolation))和图形渲染管线总结</h1><blockquote>
+<p>我们的<strong>重心坐标往往都是在屏幕空间下所得到的</strong>，如果<strong>直接使用屏幕空间下的重心坐标进行插值会造成一定的误差</strong>，与在view space下是不一样的，那么本节内容就会具体介绍如何矫正这种误差，利用屏幕空间下的重心坐标达到正确的插值。在此之后也会对到目前为止的所有内容进行总结，即图形渲染管线。</p>
+</blockquote>
+<ol>
+<li>透视矫正插值(Perspective-Correct Interpolation)</li>
+</ol>
+<ul>
+<li>一个误差示例如下</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647585455993-f3e124de-d493-48d4-bdb4-606f45d0c2d6.png" alt="image.png"></p>
+<ul>
+<li>矫正利用了三角形的相似性，求解过程本笔记略<br><a name="ohtig"></a></li>
+</ul>
+<h2 id="渲染管线总结"><a href="#渲染管线总结" class="headerlink" title="渲染管线总结"></a>渲染管线总结</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/137780634">讲解很好的一个知乎文章</a><br /><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1650437510815-f89ce55a-5591-4228-a991-f27ee21e961a.png" alt="image.png"><br><a name="vX1ZA"></a></p>
+<h3 id="1、应用阶段"><a href="#1、应用阶段" class="headerlink" title="1、应用阶段"></a>1、应用阶段</h3><p>主要由CPU负责，且完全由开发人员掌控。在这个阶段，CPU将决定传递给GPU什么样的数据（譬如渲染目标场景中的灯光、场景的模型、摄像机的位置），有时候还会对这些数据进行处理（譬如只递给GPU可以被摄像机看见的元素，其他不可见的元素被剔除（culling）出去），并且告诉GPU这些数据的渲染状态（譬如纹理、材质、着色器等）。<br><a name="RKTBO"></a></p>
+<h3 id="2、几何阶段"><a href="#2、几何阶段" class="headerlink" title="2、几何阶段"></a>2、几何阶段</h3><p>由GPU主导，<strong>绿色</strong>表示开发者可以完全编程控制的部分，<strong>虚线外框</strong>表示此阶段不是必需的，<strong>黄色</strong>表示开发者无法完全控制的部分（但可以进行一些配置），<strong>紫色</strong>表示开发者无法控制的阶段（已经由GPU固定实现）。</p>
+<ol>
+<li><strong><del>放入显存与Draw Call</del></strong></li>
+<li><strong>顶点着色器</strong></li>
+</ol>
+<p>进行模型转化与相机转换（即MVP变换中的M和V）<br />顶点着色器中，我们无法创建或销毁任何一个顶点，也无法得到当前处理的这个顶点与其他顶点的关系。<br /><strong>此阶段还可以做的：</strong></p>
+<blockquote>
+<p>坐标变换</p>
+</blockquote>
+<p>开发者可以编写程序在这个阶段修改顶点的坐标，诸如流动、摇曳等与顶点位置相关的动画操作都可以实现。上图通过坐标变换改变了原有球的形状。</p>
+<blockquote>
+<p>逐顶点色彩信息处理</p>
+</blockquote>
+<p>开发者可以在这个阶段计算每个顶点的光照信息，计算光照、阴影等。图中小球即通过各顶点法向与光源坐标进行了简单的漫反射计算。当然除了计算光照，其他与顶点颜色相关的操作<strong>都可以在这个阶段里进行</strong>。值得一提的是，这里仅仅是“信息处理”，<strong>还不是真正的着色</strong>，可以理解为“为接下来的着色计算提供一些信息”。</p>
+<ol start="3">
+<li><strong>曲面细分着色器（非必需）</strong></li>
+<li><strong>几何着色器（非必需）</strong></li>
+</ol>
+<p>开发者可以控制GPU对顶点进行增删改操作。</p>
+<ol start="5">
+<li><strong>投影</strong></li>
+</ol>
+<p>正交投影与透视投影（棱台）<br />计算时需要考虑远裁剪平面（Far Clipping Plane）和近裁剪平面(Near Clipping Plane)<br />透视投影需要额外考虑视野(Field of View)，即视锥体张开的角度，正交投影需要额外考虑尺寸（Size），这个值用于衡量视锥体底的大小。</p>
+<ol start="6">
+<li><strong>裁剪</strong></li>
+</ol>
+<p>目的就是把摄像机看不到的顶点剔除出去，使他们不被渲染到。</p>
+<ol start="7">
+<li><strong>屏幕映射</strong></li>
+</ol>
+<p>[-1,1] -&gt; [width,height]<br><a name="IgdJU"></a></p>
+<h3 id="3、光栅化阶段"><a href="#3、光栅化阶段" class="headerlink" title="3、光栅化阶段"></a>3、光栅化阶段</h3><ol>
+<li><strong>图元组装（也称为三角形设置）</strong></li>
+</ol>
+<p>通俗的说就是把相关的两个顶点“连连看”，有些能构成面，有些只是线，有些就只能一个点。</p>
+<ol start="2">
+<li><strong>三角形遍历</strong></li>
+</ol>
+<p>检验屏幕上的某个像素是否被一个三角形网格所覆盖，被覆盖的区域将生成一个片元（Fragment）。<br />值得注意的是，<strong>片元不是真正意义上的像素，而是包含了很多种状态的集合</strong>（譬如屏幕坐标、深度、法线、纹理等），这些状态用于最终计算出每个像素的颜色。<br />这一阶段涉及了<strong>抗锯齿</strong>操作<br /><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1650439670646-e181fc80-1d24-46fa-8ce5-e913eea3990e.png" alt="image.png"></p>
+<ol start="3">
+<li><strong>片元着色器（也被称为像素着色器）</strong></li>
+</ol>
+<p>为每个片元计算颜色，<strong>布林冯等等</strong>。<br />程序员可以引入<strong>纹理、法线贴图、高度图、糙度图等等</strong>。虽然片元着色器可以完成很多重要效果，但它仅可以影响单个片元。也就是说，当执行片元着色器时，它不可以将自己的任何结果直接发送给它附近的片元的。</p>
+<ol start="4">
+<li><strong>逐片元操作</strong></li>
+</ol>
+<p>对片元进行各种测试并合并<br />在OpenGL中，主要的测试有：裁剪测试（Scissor Test）、透明度测试（Alpha Test）、模板测试（Stencil Test）以及深度测试（Depth Test）。这个阶段是高度可配置的。</p>
+<hr>
+<p><strong>GAMES101的整理</strong></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647586130337-291baa7d-e6c7-4be2-ace4-7411d14a2ba1.png" alt="image.png"></p>
+<ol>
+<li>顶点处理：<ol>
+<li>对所有的顶点数据进行Model，View，和Projection的变换，最终得到投影到二维平面的坐标信息(同时为了Zbuffer保留深度z值)。如果超出观察空间的会被剪裁掉。</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647587709586-76cb2c10-6e5c-4318-a65d-b525ca8c11d4.png" alt="image.png"></p>
+<ol start="2">
+<li>三角形处理<ol>
+<li>将所有的顶点按照原几何信息，变成三角面，每个面由3个顶点组成。得到了许许多多个三角形之后，接下来的操作自然就是三角形光栅化了。</li>
+</ol>
+</li>
+<li>三角形光栅化<ol>
+<li>三角形遍历，确定哪些在三角形内的点可以被显示</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647587761530-5b5f3512-b377-4941-a1ee-e8a67a4bc1ba.png" alt="image.png"></p>
+<ol start="4">
+<li>顶点处理+片元处理<ol>
+<li>那么<strong>如何确定每个像素点或者说片元(Fragement)的颜色呢</strong>？[注：<strong>片元可能比像素更小</strong>，如MSAA抗拒齿操作的进一步细分得到的采样点]。那自然就是<strong>着色</strong>了，也就是片元处理阶段应该做的。</li>
+<li>这阶段有“顶点处理”的操作，是因为我们需要顶点信息对三角形内的点进行属性插值</li>
+<li>(tips：当然<strong>也可以直接在顶点处理阶段就算出每个顶点的颜色值</strong>，如Gouraud Shading一样)。当然这一阶段也少不了<strong>Z-Buffer</strong>来帮助确定，哪些像素点应该显示在屏幕上，哪些点被遮挡了不应该显示</li>
+<li>(tips:其实在片元处理阶段我们也可以去做<strong>texture mapping</strong>，利用texture的信息来<strong>代替blinn-phong模型漫反射系数来当作颜色</strong>，这一部分的内容会在下一节笔记中叙述！)</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647587784783-dbb4f98c-c57e-44ed-a189-5e4ed141861b.png" alt="image.png"></p>
+<ol start="5">
+<li>帧缓冲区处理<ol>
+<li>就是将所有的像素颜色信息整合在一起，输送给显示设备加以显示。这也就完成了整个图形渲染管线了。<br><a name="jHc5W"></a></li>
+</ol>
+</li>
+</ol>
+<h1 id="七：纹理映射-Texture-Mapping-及Mipmap技术"><a href="#七：纹理映射-Texture-Mapping-及Mipmap技术" class="headerlink" title="七：纹理映射(Texture Mapping)及Mipmap技术"></a>七：纹理映射(Texture Mapping)及Mipmap技术</h1><blockquote>
+<p>本节，我们会具体的讨论如何利用纹理映射让场景拥有丰富的颜色信息，以及纹理贴图精度大小所带来的问题，怎么去解决，最后将会介绍Bump Mapping和Displacement Mapping</p>
+</blockquote>
+<ol>
+<li>纹理映射(Texture Mapping)</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647588328563-2218ea21-2cf3-4408-b01d-dbbf16c06622.png" alt="image.png"></p>
+<ul>
+<li>无论是球上的图案，以及地板的木头纹理都呈现出了不同的颜色信息，那么回想在讲解<strong>Blinn-Phong反射模型</strong>的时候曾提到，<strong>一个点的颜色是由其漫反射系数决定的</strong>，反射什么颜色的光，人眼就能看见什么颜色。那么针对上面这幅图，难道要去针对每一个点自己去设定一个颜色吗？还是说有什么更方便的方法呢？那便是<strong>纹理映射</strong>了！</li>
+<li>Texture需要有 从3维World space到2维Texture space的一个映射关系<ul>
+<li>如果在三维world space中每个顶点的信息之中存储下该顶点在texture space的(u,v)坐标信息，自然而然的就直接的得到了这种映射关系。<blockquote>
+<p>至于一个顶点所对应在纹理空间的坐标是怎么得到的，这就并不是程序员们关心的了，美术大大们会帮我们最好的。<br>有一种特殊的纹理称为tile，这种纹理的特征是重复拼接之后上下左右都是连续的，因此这种纹理可以复制很多张贴在墙面或地板上。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>纹理过小和纹理过大的问题及解决方案<ol>
+<li>纹理过小<ol>
+<li>引发的问题：假如我们把一张100x100的纹理贴图应用在一500x500的屏幕之上必然会导致走样失真，因为屏幕空间的几个像素点对应在纹理贴图的坐标上都是集中在一个像素大小之内。那么如果仅仅是使用对应(u,v)坐标在texture贴图下最近的那个像素点，往往会造成严重的走样。<ol>
+<li>下图红色的是像素映射到纹理中的点，黑色的是纹理正常的排布点</li>
+</ol>
+</li>
+<li>双线性插值</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647590506187-8d36c043-9d4f-4165-95e2-5668fd414880.png" alt="image.png"></p>
+<ol start="2">
+<li>纹理过大<ol>
+<li>引发的问题：想用一个点采样的结果代替纹理空间一片范围的颜色信息，必然会导致严重失真！(从信号的角度来说就是，采样频率过低无法还原信号原貌)</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>一个示例</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647591096020-ec5d228f-697f-47cd-8115-8fc9165bbb96.png" alt="image.png"></p>
+<ul>
+<li>footprint（一个像素覆盖的区域在纹理中对应的面积）</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647591444993-c0171505-fe26-4bbf-a26f-ac115f282ebc.png" alt="image.png"></p>
+<pre><code>  - 超采样（把一个像素细分为更多采样点）可以解决，但计算量过大
+
+  2. **Mipmap**：换一种想法，不去超采样，仅仅是求出每个屏幕像素所对应的footprint里所有texels（纹理空间的像素）的的颜色均值，从点查询Point Query迈向区域查询Range Query。
+     1. 不同的屏幕像素所对应的footprint size是不一样大小的，看下图这样一个例子。远处圆圈里的footprint必然比近处的要大，因此必须要准备不同level的区域查询才可以。
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647591801662-0720d83b-3678-40c7-9823-79c1fd45965b.png" alt="image.png"></p>
+<pre><code>     2. 如何确定使用哪个level的texture呢？利用屏幕像素的相邻像素点估算footprint大小再确定level D。
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647592722966-fc8b356e-5dca-4a5f-acf9-53107898ec12.png" alt="image.png"></p>
+<blockquote>
+<p>在屏幕空间中取当前像素点的右方和上方的两个相邻像素点(4个全取也可以)，分别查询得到这3个点对应在Texture space的坐标，计算出当前像素点与右方像素点和上方像素点在Texture space的距离，二者取最大值，计算公式如图中所示，那么level D就是这个距离的log2值 (D &#x3D; log2L) ! 这不难理解，读者可以具体取几个例子比如L &#x3D; 1，L &#x3D; 2，L &#x3D; 4，看看是否符合这样的计算即可。</p>
+</blockquote>
+<ul>
+<li>这里D值算出来是一个连续值，<strong>并不是一个整数</strong>，有两种对应的方法<ul>
+<li>四舍五入取得最近的那个level D</li>
+<li>利用D值在向下和向上取整的两个不同level进行3线性插值<ul>
+<li>所谓3线性插值，就是在向下取整的D level上进行一次双线性插值(前文提过)，再在D+1 level之上进行一次双线性插值，这二者数据再根据实际的连续D值在向下和向上取整的两个不同level之间的比例，再来一次线性插值，而这整体就是一个三线性插值了。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647593153455-b2e64487-fe73-498c-946a-4dfff5c3a194.png" alt="image.png"></p>
+<pre><code>  3. 各向异性过滤Mipmap
+  - 接着上文的远处产生过曝的问题继续来谈，产生这种现象的原因是因为，所采用的不同level的Mipmap默认的都是正方形区域的Range Query，然而真实情况并不是如此
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647593351914-c34bbd98-78fd-49d7-a757-9a409d34e678.png" alt="image.png"></p>
+<pre><code>  - 示例
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647593420403-292687da-07d7-4725-877d-92165495840d.png" alt="image.png"></p>
+<pre><code>  - (Note:其实各向异性过滤并不能解决 diagonal（对角）的footprint，因为各向异性**只能解决水平或竖直的不同大小的矩形footprint**，所以针对diagonal的footprint,一般是去sample更多的点，或者提前算好diagonal 过滤的texture)
+</code></pre>
+<p><a name="Srn8p"></a></p>
+<h1 id="八：纹理映射的应用-法线贴图，凹凸贴图与阴影贴图等相关应用的原理详解"><a href="#八：纹理映射的应用-法线贴图，凹凸贴图与阴影贴图等相关应用的原理详解" class="headerlink" title="八：纹理映射的应用(法线贴图，凹凸贴图与阴影贴图等相关应用的原理详解)"></a>八：纹理映射的应用(法线贴图，凹凸贴图与阴影贴图等相关应用的原理详解)</h1><blockquote>
+<p>纹理映射的应用远不止单单作为diffuse的反射系数来表现出不同颜色。本文会详细介绍一些主要的纹理映射的应用及其原理，首先从法线映射和切线空间开始说起。</p>
+</blockquote>
+<ol>
+<li>Normal Maps及切线空间</li>
+</ol>
+<ul>
+<li><p>Texture上可以存储3维的颜色信息作为漫反射系数，那么自然也就可以存储法线向量的信息！同样利用(u,v)坐标去查询每个点的法线向量，而不使用原来模型法线信息，达到各种不同的效果，这就是Normal Maps。</p>
+<blockquote>
+<p>倘若将一个高精度模型法线信息套用在低精度模型之上，会使低精度模型的渲染效果有着巨大的提升。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647594361242-16d04bcd-95b3-45ec-9453-f4f6fb6f7d8c.png" alt="image.png"></p>
+</blockquote>
+</li>
+<li><p>如何在存储这些法线信息呢？两种方法</p>
+<ul>
+<li>一种可选的方法是，存储object space下的法线向量坐标(这会使得法线贴图看起来五颜六色的)，好处是取出来转换到世界坐标就可以直接使用，坏处是一旦该法线向量的三角形面发生了变形，那么该法线向量就不再正确。</li>
+<li>第二种方法，存储切线空间之的法线向量坐标(这会使得法线贴图大部分呈蓝色，原因下文会提)。<ul>
+<li>TBN矩阵：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38065509/article/details/106050879?spm=1001.2014.3001.5502">原博客在这</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>Bump Maps（凹凸贴图）<ol>
+<li>Bump Maps其实与Normal Maps十分类似，Normal Maps直接存储了法线信息，而Bump Maps存储的是该点逻辑上的相对高度(可为负值)，<strong>该高度的变化实际上表现了物体表面凹凸不平的特质</strong>，利用该高度信息，再计算出该点法线向量，最后再利用该法线计算光照，这就是Bump Maps的过程，只不过比直接的Normal Maps多了一步从height到normal向量。</li>
+<li>如何从相对高度计算出法线向量？<ol>
+<li>二维情况</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647595161481-902e951f-5115-4ee9-82ec-e4dc3147907b.png" alt="image.png"></p>
+<pre><code>  2. 三维情况
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647595222100-d63853b9-08f0-4b40-b801-7a83fdc49de5.png" alt="image.png"></p>
+<ul>
+<li><strong>正如最后一点所标注的，所有计算出来的法线都是局部坐标即切线空间之下，因此还需要左乘[t b n]矩阵转到(世界)相机坐标系之下得到正确法向！</strong></li>
+</ul>
+<ol start="3">
+<li>Displacement Maps（位移贴图）</li>
+</ol>
+<ul>
+<li>Displacement Maps其实又与Bump Maps十分类似了，Bump Maps是逻辑上的高度改变，而Displacement Maps则是物理上的高度改变，二者的区别就在此处，可以通过物体阴影的边缘发现这点：</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647602656533-f57d60d3-6ca4-4a2e-9703-f88cca16bd35.png" alt="image.png"></p>
+<ol start="4">
+<li>Environment Maps</li>
+</ol>
+<ul>
+<li>顾名思义就是将环境光存储在一个贴图之上。想象这样一个情形，光照离我们的物体的距离十分遥远，因此对于物体上的各个点光照方向几乎没有区别，那么唯一的变量就是人眼所观察的方向了，因此各个方向的光源就可以用一个球体进行存储,即任意一个3D方向，都标志着一个texel：</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647602848906-d75399d2-d5aa-47fe-92b6-e00c93cc4df9.png" alt="image.png"></p>
+<ul>
+<li>再投影转换到平面上就得到了环境texture</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647607272020-f07d2c2d-5595-4ebf-a76a-aa45b691d80f.png" alt="image.png"></p>
+<ul>
+<li>环境映射伪代码<ul>
+<li>光线追踪时。可以看到在光线未能撞击物体的时候，会利用光线方向求得展开之后贴图上的(u,v)坐标，再去查询颜色返回。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647607406023-f3a9e835-a530-4568-a62a-2a5bbb1b1bd8.png" alt="image.png"></p>
+<ul>
+<li>Blinn-Phong时。只需增加一项反射的颜色即可。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647607436362-c75af111-6485-44f2-9c5f-847496a46324.png" alt="image.png"></p>
+<ul>
+<li>用球体来储存，扭曲比较明显。另外一种存储的方法就是Cube Map，也就是天空盒，但是中间多了一步从方向到面上的计算。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647607680589-8f24e71e-f37a-4bee-8ac1-9beb1d11e658.png" alt="image.png"></p>
+<ol start="5">
+<li>阴影贴图Shadow Maps<ol>
+<li>第一步，把光源当做一个摄像机让它去看，去渲染整个场景一遍从而得到从光源视角的深度Buffer，记为dmap(注：此时得到的这个dmap即为shadow maps)</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647608695006-58ce35a9-39de-4696-b908-bf2a59df7e53.png" alt="image.png"></p>
+<ol start="2">
+<li>第二步，从设定好的摄像机位置去真正的渲染场景得到摄像机视角的深度Buffer，记为d</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647608729415-09f51b26-e023-4836-a158-7c89c93cce9b.png" alt="image.png"></p>
+<ol start="3">
+<li>第三步，将所有摄像机视角可见点，利用光源视角下的那一套投影矩阵，重新投影回光源，找到与之对应的dmap上的深度值<ol>
+<li>如果该点在dmap上的深度值与d上的深度值相等，则说明此点可被光源与摄像机共同看见，因此不在阴影中，如下图这种情况</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647608799252-6fbb1d9a-a06d-48fb-bac3-d1998d534bc1.png" alt="image.png"></p>
+<pre><code>  2. 如果该点在dmap上的深度值小于d上的深度值，则说明此点不可被光源看见，但摄像机看得见，即该点前方有物体遮挡，因此在阴影中，如下图这种情况
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647608827585-f726d459-74ce-4727-8c23-5e0cb55cd2ac.png" alt="image.png"></p>
+<ul>
+<li>如此便能确定每个可见像素点是否在阴影之中了，<strong>如果在阴影之中就不去计算Blinn-Phong中的镜面反射项与漫反射项。</strong></li>
+<li>效果图示例</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647609766118-4765c846-6bb4-4319-955b-7eef33fd4f30.png" alt="image.png"></p>
+<ul>
+<li>产生的shadow map示例</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647609810856-3893f20d-d00c-41c5-82a0-fb2848837687.png" alt="image.png"></p>
+<ol>
+<li>对于shadow maps还有几点小细节<ol>
+<li>浮点数难以判断相等，所以一般会有一个tolerance</li>
+<li>shadow maps查询时不采用双线性插值，只寻找最近的点，因为倘若插值发生在物体边缘时，与邻接点的深度差距很大，会导致插值结果会有很大的误差</li>
+<li><strong>只适用于点光源，产生的是硬阴影。</strong>对于非点光源，阴影的边缘会有过渡的情况，从而产生软阴影现象</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647609958222-5c5be63c-1598-4483-991c-39fd5074c894.png" alt="image.png"><br><a name="Am2V3"></a></p>
+<h1 id="九：几何1—隐式曲面-代数形式-CSG-距离函数-分型几何-与显式曲面"><a href="#九：几何1—隐式曲面-代数形式-CSG-距离函数-分型几何-与显式曲面" class="headerlink" title="九：几何1—隐式曲面(代数形式,CSG, 距离函数,分型几何)与显式曲面"></a>九：几何1—隐式曲面(代数形式,CSG, 距离函数,分型几何)与显式曲面</h1><ol>
+<li>隐式曲面(Implicit Surface)与显示曲面(Explicit Surface)的特点<ol>
+<li>隐式曲面：指的是并不会告诉你任何点的信息，只会告诉你该曲面上所有点满足的关系。例如：_x_2+_y_2+_z_2&#x3D;1<ol>
+<li>优点：十分容易的判断出一点与曲面的关系</li>
+<li>缺点：因为没有给出任何点的信息，因此如何采样到曲面上具体的点是一个很难的问题</li>
+</ol>
+</li>
+<li>显式曲面：是与隐式曲面相对应的，所有曲面的点被直接给出，或者可以通过映射关系直接得到<ol>
+<li>优缺点与隐式曲面相反</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>具体的几种隐式曲面<ol>
+<li>代数曲面(Algebraic Surfaces)</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647746002410-eef48648-574e-4137-9517-f5233b0ebbc6.png" alt="image.png"></p>
+<ol start="2">
+<li>Constructive Solid Geometry(CSG)：指的是可以对各种不同的几何做布尔运算，如并，交，差</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647746034263-1533f3a4-da49-4c96-b31d-d348b494e965.png" alt="image.png"></p>
+<ol start="3">
+<li>符号距离函数(Signed Distance Function)：可以通过距离函数来得到几何形体混合的效果</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647746142382-1ccb1437-4d66-4bec-8106-c80831052a46.png" alt="image.png"></p>
+<ol start="4">
+<li>水平集(Level Set)：与SDF很像(像是SDF的一种特殊形式)，也是找出函数值为0的地方作为曲线，但不像SDF会空间中的每一个点有一种严格的数学定义，而是对空间用一个个格子去近似一个函数，如下。对该面内的每一个点利用已经定义好的格子值进行双线性插值(在纹理映射一节已讲解)就可以得到任意一点的函数值，找出所有&#x3D;0的点作为曲面。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647746296871-af09d304-eda9-4c0c-b9ed-090b13a895eb.png" alt="image.png"></p>
+<ol start="5">
+<li>分型几何(Fractals)：是指许许多多自相似的形体最终所组成的几何形状，有点递归的意思。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647746405067-a71ac183-9b67-45ff-89bf-de41f278ee9a.png" alt="image.png"></p>
+<ol start="3">
+<li>具体的集中显式曲面<ol>
+<li>点云(Point Cloud)：很多点构成的曲面</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647746453088-f53dd68a-00e8-48a8-be59-9637f2f290ba.png" alt="image.png"></p>
+<ol start="2">
+<li>多边形网格(Polygon Mesh)：简单来说通过定义各个多边形面的顶点以及顶点之间的连接关系就可以得到许许多多的三角形面或是四边形面，再通过这些面来近似表现出我们想要的模型效果。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647746488909-9e60cffc-4566-4607-8459-017ebedfd09c.png" alt="image.png"></p>
+<p><a name="iIszF"></a></p>
+<h1 id="十：几何2—贝塞尔曲线-Bezier-Curves-与贝塞尔曲面-Bezier-Surfaces"><a href="#十：几何2—贝塞尔曲线-Bezier-Curves-与贝塞尔曲面-Bezier-Surfaces" class="headerlink" title="十：几何2—贝塞尔曲线(Bézier Curves)与贝塞尔曲面(Bézier Surfaces)"></a>十：几何2—贝塞尔曲线(Bézier Curves)与贝塞尔曲面(Bézier Surfaces)</h1><ol>
+<li>贝塞尔曲线(Bézier Curves)<ol>
+<li>其核心所在就是多次的线性插值，并在生成的新的顶点所连接构成的线段之上<strong>递归的执行这个过程</strong>，直到得到最后一个顶点。控制系数是有规律的，二项分布，伯恩斯坦多项式与之对应。</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647747634515-2957a6eb-96e4-4676-a43e-c1a37fe32901.png" alt="image.png"></p>
+<ol start="2">
+<li>性质概括<ol>
+<li>必定经过起始与终止控制点</li>
+<li>必定经与起始与终止线段相切</li>
+<li>具有仿射变换性质，可以通过移动控制点移动整条曲线</li>
+<li>凸包性质，曲线一定不会超出所有控制点构成的多边形范围</li>
+</ol>
+</li>
+<li>高阶的贝塞尔曲线很难控制局部的贝塞尔曲线形状<ol>
+<li>解决方案：分段贝塞尔曲线</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647748189217-5fd36454-5452-46c8-95f1-29ede0c203fa.png" alt="image.png"></p>
+<ol start="4">
+<li>此外还有B样条、NURBS曲线等等</li>
+<li>贝塞尔曲面(Bézier Surfaces)：由贝塞尔曲线再插值</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647748395387-db5814df-9470-4ba1-bb3c-4fed614f4101.png" alt="image.png"><br><a name="AtuEo"></a></p>
+<h1 id="十一：几何3—曲面细分-Mesh-subdivision-与曲面简化-Mesh-Smplication"><a href="#十一：几何3—曲面细分-Mesh-subdivision-与曲面简化-Mesh-Smplication" class="headerlink" title="十一：几何3—曲面细分(Mesh subdivision)与曲面简化(Mesh Smplication)"></a>十一：几何3—曲面细分(Mesh subdivision)与曲面简化(Mesh Smplication)</h1><ol>
+<li>曲面细分：是指将一个模型的面合理的分成更多小的面，从而提升模型精度，提高渲染效果</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647748959677-ed4a8da8-138e-42ef-9695-41a69231d88a.png" alt="image.png"></p>
+<ol>
+<li>Loop细分:是一种专门针对三角形面的细分方法<ol>
+<li>生成更多三角形或顶点</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647749743495-9acd4b2a-238e-4b7b-b71c-4606763952e6.png" alt="image.png"></p>
+<pre><code>  2. 调整这些三角形或顶点的位置
+     1. 分为新的顶点与旧的顶点
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647749756587-830ee6b6-d8e7-40c3-aaf0-9ee5e0c14f97.png" alt="image.png"></p>
+<ol start="2">
+<li>Catmull-Clark细分：还可以处理四边形面</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647749837107-2dbf4338-878c-4fb9-80c1-d19d64a5e619.png" alt="image.png"></p>
+<ol start="2">
+<li>曲面简化：是指将一个模型的面合理的合成更少的面，从而降低模型精度，为特定情形下提供使用(如LOD技术)</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647748983265-8b44ee2a-5b3e-4a34-899b-1dcd4808489e.png" alt="image.png"></p>
+<ol>
+<li>所利用的一个方法叫做边坍缩，如上图所示就是将一条边的两个顶点合成为一个顶点。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647750229095-59d44ccb-afc0-4ad6-b63b-3ce1898d3647.png" alt="image.png"></p>
+<pre><code>  1. 引入二次度量误差，即坍缩之后蓝色新顶点所在的位置与原来各个平面的垂直距离之和。如果能够使得这个误差最小那么对整个模型样貌修改一定程度上也会较小。
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647750314878-7043fad3-96ca-4218-8dbd-9cf84794f029.png" alt="image.png"></p>
+<p><a name="As9Si"></a></p>
+<h1 id="十二：Whitted-Style光线追踪原理详解及实现细节"><a href="#十二：Whitted-Style光线追踪原理详解及实现细节" class="headerlink" title="十二：Whitted-Style光线追踪原理详解及实现细节"></a>十二：Whitted-Style光线追踪原理详解及实现细节</h1><ol>
+<li>Whitted-Style 光线追踪<ol>
+<li>第一步 Ray Casting：从人眼或摄像机向近投影平面上的每一个像素点发射一条光线，判断与场景物体的交点，只去找最近的交点。接着连接该交点和光源，只要判断这条连线之间是否有物体存在就可以知道该交点是否在阴影之中（怎么样，是不是比shadow mapping那一套简单了许多）。紧接着利用Blinn-Phong模型对这个点进行局部光照模型计算，得到该像素的颜色，那么遍历所有近投影平面上的像素就能得到一张完整的图像。如果光线追踪仅仅是在第一步Ray Casting就停止的话，那么它的效果与局部光照模型是一样的，因此我们需要第二步，真正的考虑全局效果</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647755402630-38faecd1-cf61-4f82-b324-753c8f254540.png" alt="image.png"></p>
+<ol start="2">
+<li>第二步 Recursive (Whitted-Style) Ray Tracing：求得后续交点，并将这些所有交点与光源连接，称这些线为shadow rays（因为可以用来检测阴影），计算这些所有点的局部光照模型的结果，将其<strong>按照光线能量权重累加</strong>(该做法与递归过程等价，读者可以看看伪代码思考一下)，最终得到近投影平面上该像素点的颜色</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647755923942-d90edb41-2846-4d0f-b059-261c8ead4fd1.png" alt="image.png"></p>
+<ol start="3">
+<li>tips:<ol>
+<li>整体过程是一个递归的过程，因此需要一定的递归终止条件，比如说允许的最大反射或折射次数为10。</li>
+<li>光线在每次反射和折射之后都有能量损耗的，由系数决定，因此越往后的折射和反射光贡献的能量越小，这也是为什么在上文中提到根据光线能量权重求和。e.g. 反射系数为0.7，那么第一次反射折损30%，第二次反射折损1-（70%x70%），依次类推。</li>
+<li>如果反射或折射光线没有碰撞到物体，一般直接返回一个背景色。</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647756244862-9a915a0d-95ac-43fa-b858-8cafd037ac3f.png" alt="image.png"></p>
+<ol start="2">
+<li>光线的表示方法：o+t*d，不展开了</li>
+<li>光线与物体求交的方法<ol>
+<li>光线与隐式曲面求交的方法</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647756605469-164a02c4-2eb9-4489-b9f2-1ccd7650c271.png" alt="image.png"></p>
+<ol start="2">
+<li>光线与显式曲面求交的方法</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647756642974-3e291787-8745-43ed-953f-12b6a8372890.png" alt="image.png"></p>
+<ol start="4">
+<li><p>反射与折射</p>
+<ol>
+<li>反射方向的计算（向量计算）</li>
+<li>折射方向的计算（向量计算）</li>
+<li>菲涅尔反射（一定条件下，没有折射项，光线全部反射）</li>
+</ol>
+</li>
+<li><p>Note：whited-style光线追踪该如何考虑漫反射？</p>
+<ul>
+<li>在Blin-Phong模型中层提到过，漫反射是光线照射到粗糙物体表面从而发生向周围均匀反射光线的一种现象，反射的光线可以说是无数的！借鉴RayTracingInOneWeekend 里的做法，对于漫反射表面每次进行反射的时候，<strong>随机的选取物体表面向外半圆内的一个方向作为该次反射的方向</strong>，对其再像镜面反射及折射一样进行递归的光线追踪计算。</li>
+<li>该方法更多算是path tracing，<strong>对于传统的whited-style光线追踪来说遇到漫反射表面会直接返回点着色值而不再递归下去</strong>。</li>
+</ul>
+</li>
+</ol>
+<p><a name="P7dwm"></a></p>
+<h1 id="十三：加速光线追踪（KD-Tree-and-Bounding-Volume-Hierarchy）"><a href="#十三：加速光线追踪（KD-Tree-and-Bounding-Volume-Hierarchy）" class="headerlink" title="十三：加速光线追踪（KD-Tree and Bounding Volume Hierarchy）"></a>十三：加速光线追踪（KD-Tree and Bounding Volume Hierarchy）</h1><blockquote>
+<p>避免与场景中所有的三角形面求交</p>
+</blockquote>
+<ol>
+<li>轴对齐包围盒(Axis-Aligned Bounding Box)，轴对齐求交非常方便</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647758104059-00f7ec1e-a07e-4e6e-80f0-617fba84ad21.png" alt="image.png"></p>
+<ol start="2">
+<li>均匀空间划分Uniform Spatial Partitions (Grids)<blockquote>
+<p>为什么引入Grids?</p>
+<ol>
+<li>整个场景只有一个极其复杂的单一人物模型，那么只对这一个物体做包围盒的话，相当于对效率没有任何提升</li>
+<li>整个场景充斥着大量的细小模型，如草，花之类的，每个模型可能只有很少的面，如果此时对每个物体求包围盒，得到的包围盒数量会相当之多，对于光线追踪效率来说效率提升有限</li>
+</ol>
+</blockquote>
+<p>基于以上两点考虑，AABB并不应只局限于以物体模型为单位，可以更加精细的考虑到以三角面为单位。另外对于场景的许许多多包围盒来说应该要有一种数据结构将其统领起来。<br /><strong>因此如何更好的划分场景形成不同的AABB，使得划分之后的AABB能够更好的加速光线追踪，这就是接下来要考虑的问题关键！</strong></p>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1649249477149-e85106a2-c243-453e-80d2-d7db0ede7c4c.png" alt="image.png"></p>
+<ol>
+<li>第一步对所要考虑的场景找一个包围盒：</li>
+<li>第二步均匀划分这个大包围盒：</li>
+<li>第三步在每个重叠小包围盒上存储物体模型信息</li>
+<li>紧接着，根据光线的方向与判断出所有相交的方格(这一步可以利用bresenham算法)，倘若方格中存储有物体，再进一步与方格中的物体模型或是三角形面求交。</li>
+</ol>
+<ul>
+<li>以上就是均匀空间划分的全部过程了，简单来说就是将空间划分为多个均匀的小的AABB，再根据光线方向找出相交grid(这一步并不需要判断所有方格，正如上文提示，可以用brenham类似的方法来做)，再判断grid中是否存储了模型信息，若有则进一步求交。</li>
+<li>这种划分方法假设了找出相交方格要比直接判断与物体求交相对容易，因此划分方格数的多少也是性能的关键，方格太少，没有加速效果，方格太多，判断与方格的求交可能会拖累效率</li>
+</ul>
+<ol start="3">
+<li>KD-Tree空间划分，划分的位置由空间中三角面的分布决定，具体细节不展开<ol>
+<li>若与父结点相交，便依次判断是否与子节点相交，到叶子节点时判断是否与物体相交</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647758901816-f902d442-7680-4430-9c37-059b3334b818.png" alt="image.png"></p>
+<ol start="2">
+<li>优点：利用KD-Tree的结构来构建AABB的好处是倘若光线与哪一部分空间不相交，那么则可以省略该部分空间所有子空间的判断过程，在原始的纯粹的AABB之上更进一步提升了加速效率。</li>
+<li>缺点：判断包围盒与三角面的是否相交较难，因此划分的过程不是那么想象的简单，其次同一个三角面可能被不同的包围盒同时占有，这两个不同包围盒内的叶节点会同时存储这一个三角形面</li>
+<li>Bounding Volume Hierarchy（BVH）：与前几种方法最显著的区别就是，不再以空间作为划分依据，而是从对象的角度考虑，即三角形面<ol>
+<li>第一步同样找出场景的整体包围盒作为根节点</li>
+<li>第二步找到合适的划分点，将最大包围盒内的三角形面分为两部分，再分别重新就算新的包围盒</li>
+<li>接下来与KD-Tree的建立类似，递归的对所有子空间重复该步骤</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647759757376-400fa400-426a-49ad-b255-44838f05fb00.png" alt="image.png"></p>
+<ol start="4">
+<li>tips:<ol>
+<li>每次划分一般选择最长的那一轴划分，假设是x轴，那么划分点选择所有三角面的重心坐标在x坐标上的中位数进行划分，如此便能保证划分的三角形左右两边三角形数量尽可能差不多，当然也就使得树形结构建立的更加平衡，深度更小，平均搜索次数更少，提高了效率。</li>
+<li>与KD-Tree一样，中间节点不存储物体三角面信息，只在叶节点中存储，终止条件可设定为当前包围盒内三角形数量足够少 （e.g. 5个）</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647760171236-d61518bb-f215-466c-a501-f0e02cf728e5.png" alt="image.png"></p>
+<p><a name="SBBeo"></a></p>
+<h1 id="十四：基于物理渲染的基础知识-辐射度量学，BRDF和渲染方程"><a href="#十四：基于物理渲染的基础知识-辐射度量学，BRDF和渲染方程" class="headerlink" title="十四：基于物理渲染的基础知识(辐射度量学，BRDF和渲染方程)"></a>十四：基于物理渲染的基础知识(辐射度量学，BRDF和渲染方程)</h1><blockquote>
+<p>为什么引入辐射度量学</p>
+<ol>
+<li>whited-style光线追踪并没有对漫反射的光线进行追踪，而是直接返回当前着色点颜色</li>
+<li>在计算光源直接照射的贡献时，使用了Blinn-Phong模型，而Blinn-Phong模型本身就是一个不准确的经验模型，使用的这种模型的whited-style光线追踪自身自然也是不正确的</li>
+</ol>
+</blockquote>
+<p><strong>辐射能量(Radiant energy)，辐射通量(Radiant flux)，辐射强度(Radiant intensity)，irradiance，radiance</strong></p>
+<ol>
+<li>辐射能量(Radiant energy)和辐射通量(Radiant flux)<ol>
+<li>就是辐射出来的电磁能量，单位为焦耳。可以用物理当中的做功的大小来进行类比。</li>
+<li>所谓辐射通量或者说辐射功率，其实就是在辐射能量的基础之上除以时间，也就是单位时间的能量。同样也可以用物理当中的功率来进行类比。（比如灯泡功率）</li>
+</ol>
+</li>
+<li>辐射强度(Radiant intensity)</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647773017164-9079cb19-f4bf-4ab2-bce4-4774e7bfa5a8.png" alt="image.png"></p>
+<ol>
+<li><p>Radiant intensity：一句话来说就是从光源发出的每单位立体角上的<strong>功率</strong></p>
+<blockquote>
+<p><strong>微分立体角</strong><br><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647777135112-90e77857-0e09-4876-af00-f0b8a6fc10df.png" alt="image.png"></p>
+</blockquote>
+</li>
+<li><p>irradiance：是指<strong>每单位照射面积</strong>所接收到的power</p>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647777404007-65bef42c-8eac-4823-9441-c21b49c9c9bd.png" alt="image.png"></p>
+<ol start="3">
+<li>radiance：就是指每单位立体角，每单位垂直面积的功率，直观来看的话，很像是Intensity和irradiance的结合。它同时指定了光的方向与照射到的表面所接受到的亮度。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647774497665-3723594f-4807-4315-854e-94927264ee64.png" alt="image.png"></p>
+<ol start="3">
+<li>双向反射分布函数(BRDF)：直观的理解，不同物体表面材质自然会把一定方向上的入射亮度（dE(wi)），反射到不同的方向的光线上（dLr(wr)）</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647776171079-5ba54d26-e6b8-4040-91a2-4e0aeac939ba.png" alt="image.png"></p>
+<ul>
+<li><strong>定义</strong></li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647776219429-7cdb84c0-e3cf-401b-bb46-b9b4e2f9ac52.png" alt="image.png"></p>
+<ul>
+<li>入射光线的radiance不仅仅是光源所造成，还有可能是其他物体上着色点的反射光线的radiance，恰好反射到当前的着色点p，而其他物体上的反射光线的radiance依然也是这么个情况，没错！这与whitted-style当中的光线追踪过程十分类似，也是一个递归的过程。所以说想要解这样一个方程还是比较难的。</li>
+</ul>
+<ol start="4">
+<li>渲染方程及其物理含义解释：渲染方程知识在反射方程的基础之上添加了一个<strong>自发光项</strong>(Emission term)，从而使得反射方程更加的general：</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647776385382-d74c7286-2d36-4f95-b2b5-0aaf7930e9b3.png" alt="image.png"></p>
+<ul>
+<li>面光源就相当于无穷多个点光源的集合，只需要对 面光源所在的立体角范围进行积分，并且能够确定不同立体角方向的面光源的入射光radiance即可。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647778032056-23dce27c-ab55-495e-b29e-c50e6a647799.png" alt="image.png"></p>
+<ul>
+<li>那么更进一步的，再在场景当中加入其它物体，使得物体之间发生光线交互之后是什么情况呢：如上图所示，可以把其它物体同样考虑成面光源，对其所占立体角进行积分即可，只不过对其它物体的立体角积分不像是面光源所有入射方向都有radiance，物体的立体角可能只有个别几个方向有入射的radiance(即多次物体间光线反射之后恰好照射到着色点x)，其它方向没有，但本质上都可以视作是面光源。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647778051915-85506c89-373d-47c9-aa93-c5ab6a37e249.png" alt="image.png"></p>
+<ul>
+<li>经过一系列推导，K代表弹射次数，次数越多越接近真实图片效果,趋近收敛</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647778268276-f4e3270c-b775-4c51-8ccc-920470620031.png" alt="image.png"><br><a name="SHddF"></a></p>
+<h1 id="十五：基于物理的渲染-蒙特卡洛路径追踪"><a href="#十五：基于物理的渲染-蒙特卡洛路径追踪" class="headerlink" title="十五：基于物理的渲染(蒙特卡洛路径追踪)"></a>十五：基于物理的渲染(蒙特卡洛路径追踪)</h1><ol>
+<li>蒙特卡洛积分(Monte Carlo Integration)：<strong>对函数值进行多次采样求均值作为积分值的近似，是一种无偏估计。</strong></li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647778827881-faa105b3-d8cc-47fa-8f3f-2d1af8ab9880.png" alt="image.png"></p>
+<ul>
+<li>若均匀采样，就和黎曼积分几乎一致；蒙特卡洛积分可以自定义分布（概率密度函数）来采样。</li>
+<li>分布函数与f(x)形状相似是效果最好的</li>
+</ul>
+<ol start="2">
+<li>蒙特卡洛路径追踪(Monte Carlo Path Tracing)<blockquote>
+<p>回顾一下渲染方程：<br><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647779207857-d4f1f6d5-d4cf-4d7e-b1d7-e04aa2bd7e9b.png" alt="image.png"><br>解方程的两个难点：1、积分的计算	2、递归形式<br>注：后续计算中舍弃了自发光项，方便计算</p>
+</blockquote>
+<ol>
+<li>从具体例子出发，首先仅仅考虑直接光照（光线直接照射到渲染点然后弹射到摄像机）：</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647780300676-a19be1af-1047-4795-adc8-d46bf6af43da.png" alt="image.png"></p>
+<ol start="2">
+<li>然后考虑间接光照</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647780324901-7093778a-ca98-428f-96b3-26af3e04c598.png" alt="image.png"></p>
+<pre><code>  1. 显然这是一个类似光线追踪的递归过程，**不同在于**该方法通过对光线方向的采样从而找出一条条可行的路径，这也正是为什么叫路径追踪的原因
+</code></pre>
+<blockquote>
+<p>路径追踪算法是基于蒙特卡洛采样算法的光线渲染方法，其核心思想与光线追踪算法一致，也是让光线从相机出发寻找光源，但具体做法是：<br>从相机平面的每一个像素点发射出多条光线寻找光源，光线在与场景中物体相交，发生反射时，按照预先设定的概率分布函数从半球面选择一个方向出射，并按照BRDF函数分配出射光线的能量分布。其余部分与光线追踪一致。</p>
+</blockquote>
+<pre><code>  2. 原本是在p点采样出N条弹射光线，但为了防止光线数量爆炸，每次弹射只采样一个方向，N=1
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647780972406-94e60674-d774-4b7e-b38a-aa1dd9455d71.png" alt="image.png"></p>
+<pre><code>  3. 但采样一个方向会使结果非常noisy，解决方案：一个像素采样多条光线
+</code></pre>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647781200575-2ca4cdcd-ffc1-40e7-85fd-94a7f721180a.png" alt="image.png"></p>
+<ol start="3">
+<li>采用俄罗斯轮盘赌的方式设定递归出口</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647781347156-0b6d9d55-f88d-4aa8-92ee-81e2a4c45a08.png" alt="image.png"></p>
+<ol start="4">
+<li>算法至此还存在一个问题，效率低下，因为<strong>在计算直接光照时</strong>，发射出的光线如果均匀采样，很难hit光源。当光源较小时，这个现象更加明显，大量采样的光线都被浪费了。<ol>
+<li>解决方案：在计算直接光照的时候改进为<strong>直接对光源进行采样</strong></li>
+<li>假设光源的面积为A，那么对光源进行采样的 pdf &#x3D; 1 &#x2F; A，且需要找到dA与dwi的转换关系</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647781794410-91be1aea-e421-4dfc-a61f-434b5aa0fc6f.png" alt="image.png"></p>
+<ol start="5">
+<li>伪代码（每次进入shade函数都要对光源采样吗？此处得再看一下GAMES101的作业）</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647781862858-7b183d58-ed5d-429d-8587-bec7db1a4562.png" alt="image.png"></p>
+<ol start="6">
+<li>tips:计算直接光照的时候还需要判断光源与着色点之间是否有物体遮挡，该做法也很简单，只需从着色点x向光源采样点x’发出一条检测光线判断是否与光源之外的物体相交即可</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647781948852-3a5c3d0a-ca8b-447c-95d4-6200e874e830.png" alt="image.png"></p>
+<p><a name="YzpCr"></a></p>
+<h1 id="十六：照相机与透镜"><a href="#十六：照相机与透镜" class="headerlink" title="十六：照相机与透镜"></a>十六：照相机与透镜</h1><ol>
+<li>照相机主要部分<ol>
+<li>透镜</li>
+<li>快门</li>
+<li>传感器（相当于胶片）</li>
+</ol>
+</li>
+<li>小孔成像与视场(FOV)<ol>
+<li>fov：焦距与传感器大小都对其有影响</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647846198174-79ebb64f-f0ba-4a18-8356-87da1389c174.png" alt="image.png"></p>
+<ol start="3">
+<li>曝光(Exposure)：在第一章中我们提到传感器上接受到的是irradiance，也就是每单位面积所接受到的光线功率，而曝光就是用时间乘上了这个irradiance，Exposure &#x3D; time x irradiance，从物理意以上来说就是真正的所接受到的能量(Energy)。<ol>
+<li>曝光有三个量控制：<ol>
+<li>快门速度(Shutter speed)，快门打开时间越长，进光时间越长，进光量自然越多。快门打开时间长会产生动态模糊。</li>
+<li>光圈大小(Aperture size)，描述此项的数值称为f-stop，直观理解如果光圈越大，即遮挡的光越少那么曝光的程度就会越高。</li>
+<li>感光度(ISO gain)，对于感光度可以简单理解为对最终的图像值乘上了一个倍数。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647846511099-97ed9489-d058-47d1-8a72-b0694fcb9b84.png" alt="image.png"></p>
+<p>](<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38065509/article/details/106714036">https://blog.csdn.net/qq_38065509/article/details/106714036</a>)</p>
+<ol start="4">
+<li>景深(Depth of Field)<ol>
+<li>当一个传感器平面<strong>不在一个物体真正精确的成像平面之上时</strong>(即之前所提到到像距z i 的平面)，便会出现模糊。</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647847072063-9060ba8a-3800-43a6-b14a-068d1d63f501.png" alt="image.png"></p>
+<ol start="2">
+<li>景深模糊程度可以接受的距离，再此距离之外可能很模糊</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647847394448-bb4dde39-96e9-44d2-9ae5-63a96d172f0d.png" alt="image.png"></p>
+<ol start="5">
+<li>关于如何在光线追踪中实现景深，只需要简单的模拟透镜的光线传播即可</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/22924277/1647847600937-568087f3-d87c-4edd-83e7-58df6b799df0.png" alt="image.png"><br><a name="XHdJt"></a></p>
+<h1 id="十七：基于物理的渲染：微平面理论-Cook-Torrance-BRDF推导"><a href="#十七：基于物理的渲染：微平面理论-Cook-Torrance-BRDF推导" class="headerlink" title="十七：基于物理的渲染：微平面理论(Cook-Torrance BRDF推导)"></a>十七：基于物理的渲染：微平面理论(Cook-Torrance BRDF推导)</h1></div></div><link rel="stylesheet" href="/css/partial/footer.css"><div class="footer"><p><span>Copyright © 2017 - 2022  </span><a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/">蜀ICP备19024124号</a></p><p><i class="iconfont iconchakan"><span>本站总访问量</span><span id="busuanzi_container_site_pv">  <span id="busuanzi_value_site_pv"></span> </span></i><i class="iconfont iconabout"><span>本站访客数</span><span id="busuanzi_container_site_uv">  <span id="busuanzi_value_site_uv"></span> </span></i></p></div></div></div><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
