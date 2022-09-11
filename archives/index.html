@@ -2,11 +2,21 @@
 </head><body class="scroll"><link rel="stylesheet" href="/css/partial/header.css"><div class="header scroll"><div class="maxwidth"><div class="nav"><a id="artlist" href="/404"><i class="iconfont icon404"></i><span class="headhid">&nbsp;404</span></a><a class="focuspage" id="artlist" href="/archives"><i class="iconfont iconarchives"></i><span class="headhid">&nbsp;Archives</span></a><a id="artlist" href="/link"><i class="iconfont iconlink"></i><span class="headhid">&nbsp;Link</span></a><a id="artlist" href="/about"><i class="iconfont iconabout"></i><span class="headhid">&nbsp;About</span></a></div><div class="search">TONG-H</div></div></div><div class="main"> <div class="maxwidth"><link rel="stylesheet" href="/css/partial/sidebar.css"><div class="scroll" id="sidebar"><div class="social"><a href="/archives" title="Home"><i class="iconfont iconHome"></i></a><a href="1813828837@qq.com" title="E-Mail"><i class="iconfont iconweibiaoti554"></i></a><a target="_blank" rel="noopener" href="https://github.com/Ginkgowind" title="GitHub"><i class="iconfont iconGitHub"></i></a></div><div class="tags"><a href="/tags/C/" style="font-size: 12px; color: #ffac00">C++</a> <a href="/tags/UE4/" style="font-size: 12px; color: #ffac00">UE4</a> <a href="/tags/cs/" style="font-size: 12px; color: #ffac00">cs</a> <a href="/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/" style="font-size: 12px; color: #ffac00">图形学</a> <a href="/tags/%E5%A5%BD%E6%96%87%E6%8E%A8%E8%8D%90/" style="font-size: 12px; color: #ffac00">好文推荐</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 12px; color: #ffac00">数据结构</a></div></div><div class="archive rightside"><div id="list_archives" style="opacity: 0;display:  none"><div class="switch" id="arshow"><i class="iconfont iconArchives"></i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a><span class="archive-list-count">7</span></li></ul></div><div id="normalposts"><div class="switch" id="poshow"><i class="iconfont iconshijian"></i></div><article><a class="artititle" href="/2022/09/10/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><div class="content ellipse"><p>以下文章请按顺序阅读
 
 5种构建型模式知乎：如何用「设计模式」制作珍珠奶茶？
-7 种结构型模式知乎：详解设计模式之结构型模式 （上）
-知乎：详解设计模式之结构型模式 （下）
-11 种行为型模式知乎：哪种类型的程序员最容易被“祭天”
-知乎：从零开始学习设计模式之行为型模式（2）
-知乎：如何用设计模式吃自助餐</p></div><div class="meta"><i class="iconfont iconshijian" title="创建时间">2022-09-10</i></div></article><article><a class="artititle" href="/2022/09/10/GAMES101%E6%95%B4%E7%90%86/">《GAMES101》整理</a><div class="content ellipse"><p>基于《GAMES101》课程整理自CSDN某位博主
+简单工厂模式、工厂方法模式、抽象工厂模式
+单例模式，两种实现方式（补充：C++单例模式，内含有关线程安全等的C++实现，重点是static）
+建造型模式
+简短总结
+
+简单工厂模式：switch实现，在绝大多数情况下， 简单工厂是引入工厂方法或抽象工厂模式时的一个中间步骤。缺点如下：
+
+生产商品类型过多时会变成超级类，并且每个产品生产过程变化时都需要来修改此工厂，也就是说这个类不止一个引起修改的原因，也就是违反了单一职责原则。
+添加新功能时需要修改现有的类，违反了开闭原则。
+
+
+工厂方法模式：基类工厂提供一个接口，每个子类工厂都实现此接口。将构造过程封装了起来，但核心作用还没搞明白。同时解决了简单工厂的两个弊端，但引入了太多的类。
+
+
+抽象工厂模式：抽象工厂基类声明一组创建各种抽象产品的方法，每个具体工厂都实...</p></div><div class="meta"><i class="iconfont iconshijian" title="创建时间">2022-09-10</i></div></article><article><a class="artititle" href="/2022/09/10/GAMES101%E6%95%B4%E7%90%86/">《GAMES101》整理</a><div class="content ellipse"><p>基于《GAMES101》课程整理自CSDN某位博主
 
 
 一：基础变换矩阵总结(缩放，旋转，位移)
